@@ -2,6 +2,7 @@ function userReducer (state, action) {
     switch (action.type) {
         case 'LOGIN':
         case 'REGISTER':
+			console.log('action-',action);
             return {
                 'username': action.username,
                 'access_token': action.access_token
