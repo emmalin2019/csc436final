@@ -1,0 +1,46 @@
+{
+  "posts": [
+    {
+      "id": 3,
+      "title": "Post 3",
+      "content": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.\n\nVestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
+      "author": "Ted",
+      "complete": false,
+      "completedOn": 1635812451083
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "paul",
+      "password": "badpassword"
+    },
+    {
+      "username": "newtestuser",
+      "password": "test",
+      "id": 2
+    },
+    {
+      "username": "newuser",
+      "password": "test",
+      "id": 3
+    }
+  ],
+  "themes": [
+    {
+      "id": 1,
+      "primaryColor": "deepskyblue",
+      "secondaryColor": "coral"
+    },
+    {
+      "id": 2,
+      "primaryColor": "orchid",
+      "secondaryColor": "mediumseagreen"
+    },
+    {
+      "id": 3,
+      "primaryColor": "darkslategray",
+      "secondaryColor": "slategray"
+    }
+  ]
+}
