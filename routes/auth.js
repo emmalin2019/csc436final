@@ -41,7 +41,7 @@ router.post('/login', async function(req, res, next) {
 //~ E7N/lpSy5CPITxTXgSzbJmIJCKjhu6y8OGQwzHJywDOh/vszTMr2rxjfOriuA5Ho
 //~ KQIDAQAB
 //~ -----END PUBLIC KEY-----`;//privateKey
-          const token = jwt.sign({ id: 'user._id' }, privateKey, { algorithm: 'RS256' });
+          const token = jwt.sign({ id: user._id }, privateKey, { algorithm: 'RS256' });
           console.log('----2');
           return res.status(200).json({"access_token": token});
         } else {
