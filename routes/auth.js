@@ -23,7 +23,9 @@ router.post('/login', async function(req, res, next) {
   if (req.body.username && req.body.password) {
     
     const user = await User.findOne().where('username').equals(req.body.username).exec()
-
+	
+	console.log(bcrypt.compare(req.body.password, user.password), req, res, next, user);
+	
     if (user) {
       return bcrypt.compare(req.body.password, user.password).then(result => {
         if (result === true) {
@@ -45,6 +47,7 @@ router.post('/login', async function(req, res, next) {
 });
 
 router.post('/register', async function(req, res, next) {
+	console.log('xxx',req,res,next);
   if (req.body.username && req.body.password && req.body.passwordConfirmation) {
     if(req.body.password === req.body.passwordConfirmation) {
       const user = new User({
