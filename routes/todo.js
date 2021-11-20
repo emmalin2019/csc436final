@@ -6,7 +6,7 @@ const Todo = require('../models/Todo');
 const privateKey = process.env.JWT_PRIVATE_KEY;
 
 router.use(function(req, res, next) {
-      console.log(req.header("Authorization"))
+      console.log(req, res, next, req.header("Authorization"));
       if (req.header("Authorization")) {
           try {
               req.payload = jwt.verify(req.header("Authorization"),
