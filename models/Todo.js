@@ -6,7 +6,7 @@ const TodoSchema = new Schema(
   {
     title: {type: String, required: true},
     description: {type: String, required: true},
-    author: {type: Schema.Types.ObjectId, ref: 'User'}
+    author: {type: Schema.Types.ObjectId, ref: 'User'},
     complete: {type: Boolean, required: true, default: false},
 	dateCompleted: {type: Number, required: true, default: -1},
 	hidden: {type: Boolean, required: true, default: false},

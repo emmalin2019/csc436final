@@ -5,7 +5,7 @@ var logger = require('morgan');
 require('dotenv').config()
 require('./models/setupMongo')();
 
-var postRouter = require('./routes/post');
+var todoRouter = require('./routes/todo');
 var authRouter = require('./routes/auth');
 
 var app = express();
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.use('/auth', authRouter);
-app.use('/post', postRouter);
+app.use('/todo', todoRouter);
 
 
 app.use(express.static(path.join(__dirname, 'build')));

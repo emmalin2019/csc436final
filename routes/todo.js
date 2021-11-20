@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const jwt = require('jsonwebtoken');
-const Post = require('../models/Todo')
+const Todo = require('../models/Todo');
 
 const privateKey = process.env.JWT_PRIVATE_KEY;
 
@@ -47,7 +47,7 @@ router.post('/', async function (req, res) {
         return res.status(201).json({
             "id": savedTodo._id,
             "title": savedTodo.title,
-            "description": savedPost.description,
+            "description": savedTodo.description,
             "author": savedPost.author
         })
     }).catch( error => {
