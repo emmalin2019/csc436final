@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const jwt = require('jsonwebtoken');
-const Post = require('../models/Post')
+const Post = require('../models/Todo')
 
 const privateKey = process.env.JWT_PRIVATE_KEY;
 
@@ -23,31 +23,31 @@ router.use(function(req, res, next) {
   })
 
 router.get('/', async function(req, res, next) {
-    const posts = await Post.find().where('author').equals(req.payload.id).exec()
-    return res.status(200).json({"posts": posts})
+    const todos = await Todo.find().where('author').equals(req.payload.id).exec()
+    return res.status(200).json({"todos": todos})
 });
 
-router.get('/:postId', async function(req, res, next) {
+router.get('/:todoId', async function(req, res, next) {
     //const posts = await Post.find().where('author').equals(req.payload.id).exec()
     
     //mongoose find query to retrieve post where postId == req.params.postId
-    const post = await Post.findOne().where('_id').equals(req.params.postId).exec()
+    const todo = await Todo.findOne().where('_id').equals(req.params.todoId).exec()
     
-    return res.status(200).json(post)
+    return res.status(200).json(todo)
 });
 
 router.post('/', async function (req, res) {
-	const post = new Post({
+	const todo = new Todo({
 		"title": req.body.title,
-		"content": req.body.content,
+		"description": req.body.description,
 		"author": req.payload.id
 	})
 
-    await post.save().then( savedPost => {
+    await todo.save().then( savedTodo => {
         return res.status(201).json({
-            "id": savedPost._id,
-            "title": savedPost.title,
-            "content": savedPost.content,
+            "id": savedTodo._id,
+            "title": savedTodo.title,
+            "description": savedPost.description,
             "author": savedPost.author
         })
     }).catch( error => {

@@ -24,28 +24,12 @@ router.post('/login', async function(req, res, next) {
     
     const user = await User.findOne().where('username').equals(req.body.username).exec()
 	
-	//console.log(user);
-	//console.log('----', await bcrypt.compare(req.body.password, user.password));//, req, res, next, user);
-	
     if (user) {
       return await bcrypt.compare(req.body.password, user.password).then(result => {
-		  console.log('----');
         if (result === true) {
-			console.log('----1',user,privateKey,jwt);
-			//const p = `-----BEGIN PUBLIC KEY-----
-//~ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApieSEJk3rt9MTZx5NljR
-//~ WVujGbHDhVngYQOVkeuIXelOS45vJ6zaQOJIt5BJV7W9FEWz6uxM+nWCnikL4Jvi
-//~ FZdIAbDuqdk/SLUW2lU6JjjpQy2IwXmIIJngUG8r3InEtVoepH3rFdFeWbfzf5sg
-//~ OwzrmpcHITROhGTRKRQNERM/wZqq7GujP727qLlipI4CWC+5fn6oEcLvG2z1sK9C
-//~ f1JEukcYOUgz3dTbFtoQYdllwxm7kziSbeShcRRtAveWQ43yhXdl8hH1nIv0isJI
-//~ E7N/lpSy5CPITxTXgSzbJmIJCKjhu6y8OGQwzHJywDOh/vszTMr2rxjfOriuA5Ho
-//~ KQIDAQAB
-//~ -----END PUBLIC KEY-----`;//privateKey  algorithm: 'RS256' 
           const token = jwt.sign({ id: user._id }, privateKey, {});
-          console.log('----2');
           return res.status(200).json({"access_token": token});
         } else {
-			console.log('----3');
           return res.status(401).json({"error": "Invalid credentials."})
         }
       }).catch(error => {
@@ -61,7 +45,6 @@ router.post('/login', async function(req, res, next) {
 });
 
 router.post('/register', async function(req, res, next) {
-	console.log('xxx',req,res,next);
   if (req.body.username && req.body.password && req.body.passwordConfirmation) {
     if(req.body.password === req.body.passwordConfirmation) {
       const user = new User({
