@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-//const uri = "mongodb+srv://admin:HaTrlOuUrnrmZ1rQ@cluster0.qeg4a.mongodb.net/blogAppInClass?retryWrites=true&w=majority";
 const uri = process.env.DB_URI;
 
 function connect() {
