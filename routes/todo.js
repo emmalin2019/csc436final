@@ -10,7 +10,6 @@ router.use(function(req, res, next) {
           try {
               req.payload = jwt.verify(req.header("Authorization"),
 				privateKey, {algorithms: ['HS256']})
-              console.log(req.payload)
               // algorithms: ['RS256'] 
           } catch(error) {
               return res.status(401).json({"error": error.message});
@@ -27,7 +26,6 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/:todoId', async function(req, res, next) {
-    //const posts = await Post.find().where('author').equals(req.payload.id).exec()
     
     //mongoose find query to retrieve post where postId == req.params.postId
     const todo = await Todo.findOne().where('_id').equals(req.params.todoId).exec()
@@ -36,15 +34,10 @@ router.get('/:todoId', async function(req, res, next) {
 });
 
 router.delete('/:todoId', async function(req, res, next) {
-    //const posts = await Post.find().where('author').equals(req.payload.id).exec()
-    
-    //mongoose find query to retrieve post where postId == req.params.postId
-    //const todo = 
-    //await Todo.deleteOne().where('_id').equals(req.params.todoId).exec();
     
     const dc = await Todo.deleteOne({ // returns {deletedCount: 1}
 		_id: req.params.todoId, author: req.payload.id
-	});//;//.exec();
+	});
     
     return res.status(200).json(dc);
 });
@@ -54,14 +47,7 @@ router.patch('/:todoId/:completed', async function(req, res, next) {
     let c = (req.params.completed == 'true') ? true : false;
 	let uc = await Todo.updateOne(
 		{_id: req.params.todoId, author: req.payload.id}, 
-		{completed: c, dateCompleted: t}//,
-		//~ function (err, docs) {
-			//~ if (err) {
-				//~ console.log(err);
-			//~ } else {
-				//~ console.log("Updated : ", docs);
-			//~ }
-		//~ }
+		{completed: c, dateCompleted: t}
 	);
     
     return res.status(200).json(
@@ -77,7 +63,6 @@ router.post('/', async function (req, res) {
 	})
 
     await todo.save().then( savedTodo => {
-		console.log('savedTodo',savedTodo);
         return res.status(201).json({
             "id": savedTodo._id,
             "title": savedTodo.title,

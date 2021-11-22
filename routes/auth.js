@@ -53,7 +53,6 @@ router.post('/register', async function(req, res, next) {
       })
           
       return await user.save().then( savedUser => {
-        console.log()
         return res.status(201).json({
           "id": savedUser._id,
           "username": savedUser.username
